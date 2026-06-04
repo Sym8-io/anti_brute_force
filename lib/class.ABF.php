@@ -139,6 +139,7 @@ class ABF implements Singleton
     private function __construct()
     {
         $s = Symphony::Configuration()->get();
+        $s['anti-brute-force'] = $s['anti-brute-force'] ?? null;
         $this->_settings = $s[ABF::SETTING_GROUP];
         unset($s);
 
@@ -738,6 +739,9 @@ class ABF implements Singleton
     public function setConfigVal(&$context, &$errors, $key, $autoSave = true, $type = 'numeric')
     {
         // get the input
+        $context['settings'][ABF::SETTING_GROUP]['auto-unban'] = $context['settings'][ABF::SETTING_GROUP]['auto-unban'] ?? 'off';
+        $context['settings'][ABF::SETTING_GROUP]['restrict-access'] = $context['settings'][ABF::SETTING_GROUP]['restrict-access'] ?? 'off';
+
         $input = $context['settings'][ABF::SETTING_GROUP][$key];
         $iVal = intval($input);
 
@@ -797,6 +801,9 @@ class ABF implements Singleton
         }
         if ($ret) {
             $ret = $this->install_v2_0_2();
+        }
+        if ($ret) {
+            $ret = $this->install_v2_2_1();
         }
         if ($ret) {
             // set default values
@@ -924,6 +931,18 @@ class ABF implements Singleton
         return Symphony::Database()->import($sql);
     }
 
+    private function install_v2_2_1()
+    {
+        $sql = "
+            ALTER TABLE $this->TBL_ABF    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+            ALTER TABLE $this->TBL_ABF_GL CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+            ALTER TABLE $this->TBL_ABF_BL CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+            ALTER TABLE $this->TBL_ABF_WL CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+        ";
+
+        return Symphony::Database()->import($sql);
+    }
+
     /**
      *
      * This method will update the extension according to the
@@ -958,6 +977,11 @@ class ABF implements Singleton
         // less than 2.0.2
         if ($ret && version_compare($previousVersion, '2.0.2') == -1) {
             $ret = $this->install_v2_0_2();
+        }
+
+        // less than 2.2.1
+        if ($ret && version_compare($previousVersion, '2.2.1') == -1) {
+            $ret = $this->install_v2_2_1();
         }
 
         return $ret;
