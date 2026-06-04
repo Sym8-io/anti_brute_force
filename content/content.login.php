@@ -173,9 +173,11 @@ class contentExtensionAnti_brute_forceLogin extends contentLogin
                 $email->setRecipients($author['email']);
                 $email->setSubject(__('Unban IP link'));
                 $email->setTextPlain(
-                    __('Please follow this link to unban your IP: ') .
-                    SYMPHONY_URL . ABF::UNBAND_LINK . $failure[0]->Hash . '/' . PHP_EOL .
-                    __('If you do not remember your password, follow the "forgot password" link on the login page.') . PHP_EOL .
+                    __('Hi %s,', array($author['first_name'])) . PHP_EOL .
+                    __('Please follow this link to unban your IP: ') . PHP_EOL . PHP_EOL .
+                    '    ' . SYMPHONY_URL . ABF::UNBAND_LINK . $failure[0]->Hash . '/' . PHP_EOL . PHP_EOL .
+                    __('If you do not remember your password, follow the "forgot password" link on the login page.') . PHP_EOL . PHP_EOL .
+                    __('Best Regards,') . PHP_EOL .
                     __('The Symphony Team')
                 );
 
