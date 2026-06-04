@@ -155,7 +155,15 @@ class contentExtensionAnti_brute_forceLogin extends contentLogin
 
                 // if no default values are set
                 if (!is_array($emailSettings) || empty($emailSettings['from_address'])) {
-                    $email->setFrom($author['email'], Symphony::Configuration()->get('sitename','general'));
+                    // Do not fall back to the recipient email address as sender.
+                    // While this was common practice years ago, modern mail providers
+                    // (Google, Yahoo, Microsoft) enforce strict SPF/DKIM/DMARC policies,
+                    // making forged or mismatched sender addresses unreliable and likely
+                    // to be rejected or flagged as spam.
+                    $this->_email_sent = false;
+                    $this->_email_error = __('Sender email address cannot be empty.');
+
+                    return;
                 }
                 // use default settings, as this should help with SPF and DKIM
                 else {
@@ -177,6 +185,7 @@ class contentExtensionAnti_brute_forceLogin extends contentLogin
             } catch (Exception $e) {
                 // do nothing
                 $this->_email_sent = false;
+                $this->_email_error = $e->getMessage();
             }
         }
     }
