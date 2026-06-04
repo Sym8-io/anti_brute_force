@@ -98,6 +98,7 @@ class extension_anti_brute_force extends Extension
                 'location' => __(self::EXT_NAME),
                 'name' => __(self::EXT_NAME),
                 'limit' =>  ABF::instance()->getNaviguationGroup(),
+                'index' => 50,
                 'children' => array(
                     array(
                         'name'  => __('Banned IPs'),

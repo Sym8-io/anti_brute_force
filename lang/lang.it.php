@@ -1,153 +1,153 @@
 <?php
 
-  $about = array(
-		'name' => 'Italian',
-		'author' => array(
-			'name' => 'Davide Grobberio',
-			'email' => 'davide@zaniniadv.it',
-			'website' => 'http://www.zaniniadv.it/'
-		),
-		'release-date' => '2013-01-27',
-	);
+$about = array(
+    'name' => 'Italian',
+    'author' => array(
+        'name' => 'Davide Grobberio',
+        'email' => 'davide@zaniniadv.it',
+        'website' => 'http://www.zaniniadv.it/'
+    ),
+    'release-date' => '2013-01-27',
+);
 
-	/**
-	 * Italian translation for "Anti Brute Force" extension
-	 */
-	
-	$dictionary = array(
+/**
+ * Italian translation for "Anti Brute Force" extension
+ */
 
-		'Anti Brute Force' =>
-		'Anti "Brute Force"',
+$dictionary = array(
 
-		'Secure your backend login page against brute force attacks' =>
-		'Proteggi la sezione di amministrazione del tuo sito contro gli attacchi di "brute force" (forza bruta)',
+    'Anti Brute Force' =>
+    'Anti "Brute Force"',
 
-		'Define here when and how IP are blocked' =>
-		'Definisci qui quando e come gli IP sono bloccati',
+    'Secure your backend login page against brute force attacks' =>
+    'Proteggi la sezione di amministrazione del tuo sito contro gli attacchi di "brute force" (forza bruta)',
 
-		'Limite errori' =>
-		'Limite d\'erreurs',
+    'Define here when and how IP are blocked' =>
+    'Definisci qui quando e come gli IP sono bloccati',
 
-		'Blocked length <em>in minutes</em>' =>
-		'Blocco <em>in minuti</em>',
+    'Limite errori' =>
+    'Limite d\'erreurs',
 
-		'"%s" is not a valid positive integer' =>
-		'"%s" non è un numero intero positivo valido',
+    'Blocked length <em>in minutes</em>' =>
+    'Blocco <em>in minuti</em>',
 
-		'Your IP address is currently banned, due to typing too many wrong usernames/passwords.' =>
-		'Il tuo indirizzo IP è stato bloccato, causa troppe digitazioni (nome utente o password) sbagliate.',
+    '"%s" is not a valid positive integer' =>
+    '"%s" non è un numero intero positivo valido',
 
-		'You can ask your administrator to unlock your account or wait %s minutes.' =>
-		'Potete contattare il vostro amministratore per sbloccare l\'account, oppure attendete %s minuti.',
+    'Your IP address is currently banned, due to typing too many wrong usernames/passwords.' =>
+    'Il tuo indirizzo IP è stato bloccato, causa troppe digitazioni (nome utente o password) sbagliate.',
 
-		'Banned IP address' =>
-		'Indirizzo IP bannato',
+    'You can ask your administrator to unlock your account or wait %s minutes.' =>
+    'Potete contattare il vostro amministratore per sbloccare l\'account, oppure attendete %s minuti.',
 
-		'Banned IPs' =>
-		'Indirizzi IP bannati',
+    'Banned IP address' =>
+    'Indirizzo IP bannato',
 
-		'IP Address' =>
-		'Indirizzo IP',
-		
-		'Raw IP value' =>
-		null,
+    'Banned IPs' =>
+    'Indirizzi IP bannati',
 
-		'Last Attempt' =>
-		'Ultimo tentativo',
+    'IP Address' =>
+    'Indirizzo IP',
 
-		'Failed Count' =>
-		'Conta non riuscita',
+    'Raw IP value' =>
+    null,
 
-		'User Agent (browser)'=>
-		'User Agent (browser)',
+    'Last Attempt' =>
+    'Ultimo tentativo',
 
-		'Username' =>
-		'Utente',
+    'Failed Count' =>
+    'Conta non riuscita',
 
-		'Failures remove successfuly' =>
-		'Rimossione avvenuta con successo',
+    'User Agent (browser)'=>
+    'User Agent (browser)',
 
-		'Source' =>
-		'Sorgente',
+    'Username' =>
+    'Utente',
 
-		'Enter your email address to be sent a remote unban link with further instructions.' =>
-		'Inserisci l\' indirizzo e-mail cui inviare un collegamento non bloccato con ulteriori istruzioni.',
+    'Failures remove successfuly' =>
+    'Rimossione avvenuta con successo',
 
-		'Email Address' =>
-		'Indirizzo email',
+    'Source' =>
+    'Sorgente',
 
-		'Users can unban their IP via email' =>
-		'Gli utenti possono sbloccare il loro indirizzo IP tramite email',
+    'Enter your email address to be sent a remote unban link with further instructions.' =>
+    'Inserisci l\' indirizzo e-mail cui inviare un collegamento non bloccato con ulteriori istruzioni.',
 
-		'Alternatively, you can <a href="%s">un-ban your IP by email</a>.' =>
-		'Altrimenti, puoi <a href="%s">sbloccare il tuo indirizzo tramite email</a>.',
+    'Email Address' =>
+    'Indirizzo email',
 
-		'Please follow this link to unban your IP: ' =>
-		'Segui questo link per sbloccare il tuo IP: ',
+    'Users can unban their IP via email' =>
+    'Gli utenti possono sbloccare il loro indirizzo IP tramite email',
 
-		'If you do not remember your password, follow the "forgot password" link on the login page.' =>
-		'Se non ricordi la password, segui il link "recupera password" alla pagina di login.',
+    'Alternatively, you can <a href="%s">un-ban your IP by email</a>.' =>
+    'Altrimenti, puoi <a href="%s">sbloccare il tuo indirizzo tramite email</a>.',
 
-		'Gray list threshold' =>
-		'Soglia lista grigia',
+    'Please follow this link to unban your IP: ' =>
+    'Segui questo link per sbloccare il tuo IP: ',
 
-		'Gray list duration <em>in days</em>' =>
-		'Durata lista grigia<em>in giorni</em>',
+    'If you do not remember your password, follow the "forgot password" link on the login page.' =>
+    'Se non ricordi la password, segui il link "recupera password" alla pagina di login.',
 
-		'Your IP address is currently <strong>black listed</strong>, due to too many bans.' =>
-		'Il tuo indirizzo IP è attualmente <strong>bloccato</strong>, causa troppi sbagli.',
+    'Gray list threshold' =>
+    'Soglia lista grigia',
 
-		'Ask your administrator to unlock your IP.' =>
-		'Chiedi al tuo amministratore di sbloccare il tuo indirizzo IP.',
+    'Gray list duration <em>in days</em>' =>
+    'Durata lista grigia<em>in giorni</em>',
 
-		'Black listed IP address' =>
-		'Lista nera indirizzi IP',
+    'Your IP address is currently <strong>black listed</strong>, due to too many bans.' =>
+    'Il tuo indirizzo IP è attualmente <strong>bloccato</strong>, causa troppi sbagli.',
 
-		'Date Created' =>
-		'Data di creazione',
+    'Ask your administrator to unlock your IP.' =>
+    'Chiedi al tuo amministratore di sbloccare il tuo indirizzo IP.',
 
-		'Entries remove successfuly' =>
-		'Voci rimosse con successo',
+    'Black listed IP address' =>
+    'Lista nera indirizzi IP',
 
-		'Change' =>
-		'Modifica',
+    'Date Created' =>
+    'Data di creazione',
 
-		'Black list' =>
-		'Lista nera',
+    'Entries remove successfuly' =>
+    'Voci rimosse con successo',
 
-		'Gray list' =>
-		'Lista grigia',
+    'Change' =>
+    'Modifica',
 
-		'White list' =>
-		'Lista bianca',
+    'Black list' =>
+    'Lista nera',
 
-		'Add' =>
-		'Aggiungi',
+    'Gray list' =>
+    'Lista grigia',
 
-		'IP added successfuly' =>
-		'IP aggiunto con successo',
+    'White list' =>
+    'Lista bianca',
 
-		'Black Listed IPs' =>
-		'IP lista nera',
+    'Add' =>
+    'Aggiungi',
 
-		'Gray Listed IPs' =>
-		'IP lista grigia',
+    'IP added successfuly' =>
+    'IP aggiunto con successo',
 
-		'White Listed IPs' =>
-		'IP lista bianca',
+    'Black Listed IPs' =>
+    'IP lista nera',
 
-		"%s is not installed properly and does not protect Symphony until this is fixed. Ensure latest version is installed." =>
-		"%s non è installato correttamente e non proteggerà Symphony fino a quando questo non sarà risolto. Assicurarsi di aver installato l'ultima versione.",
+    'Gray Listed IPs' =>
+    'IP lista grigia',
 
-		'Unban via email' =>
-		'Sblocca via email',
+    'White Listed IPs' =>
+    'IP lista bianca',
 
-		'There are currently' =>
-		'Ci sono attualmente',
+    "%s is not installed properly and does not protect Symphony until this is fixed. Ensure latest version is installed." =>
+    "%s non è installato correttamente e non proteggerà Symphony fino a quando questo non sarà risolto. Assicurarsi di aver installato l'ultima versione.",
 
-		'%d blocked IPs.' =>
-		'%d indirizzi IP bloccati',
+    'Unban via email' =>
+    'Sblocca via email',
 
-		'Restrict access from authors' =>
-		'Limitare l\'accesso agli autori',
-	);
+    'There are currently' =>
+    'Ci sono attualmente',
+
+    '%d blocked IPs.' =>
+    '%d indirizzi IP bloccati',
+
+    'Restrict access from authors' =>
+    'Limitare l\'accesso agli autori',
+);
