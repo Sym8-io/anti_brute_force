@@ -173,6 +173,8 @@ class ABF implements Singleton
         if ($this->_isInstalled) {
 
             if (!$this->isWhiteListed()) {
+                // discard form data
+                $_POST = array();
 
                 // check if blacklisted
                 if ($this->isBlackListed()) {
