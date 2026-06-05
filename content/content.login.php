@@ -22,6 +22,19 @@ class contentExtensionAnti_brute_forceLogin extends contentLogin
     private $_email_sent = null;
 
     /**
+     * Testing the Pico CSS login style to ensure backward compatibility
+     * with the old Symphony style in a minimally invasive way.
+     */
+    private function oldSymphony()
+    {
+        if (!file_exists(SYMPHONY . '/assets/css/pico-login.css')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      *
      * Overrides the view method
      */
@@ -41,7 +54,7 @@ class contentExtensionAnti_brute_forceLogin extends contentLogin
             // evil users won't be able to detect anything from the response
             // they *should* still be blocked since guessing a hash is
             // practically infeasible
-            redirect(SYMPHONY_URL);
+            redirect(SYMPHONY_URL . '/login/');
             die();
 
         } else {
@@ -54,53 +67,104 @@ class contentExtensionAnti_brute_forceLogin extends contentLogin
 
             $this->setTitle(sprintf('%1$s &ndash; %2$s', __('Unban via email'), __('Symphony')));
 
-            $this->Form = Widget::Form('', 'post');
-            $this->Form->setAttribute('class', 'frame');
+            $main = new XMLElement('main', null);
+            if ($this->oldSymphony() === true) {
+                $main->setAttribute('class', 'container frame');
+            } else {
+                $main->setAttribute('class', 'container login');
+            }
 
-            $this->Form->appendChild(new XMLElement('h1', __('Symphony')));
+            $this->Form = Widget::Form('/symphony/extension/anti_brute_force/login/', 'post', '');
+            if ($this->oldSymphony() === false) {
+                $this->Form->setAttribute('class', 'frame');
+            }
+
+            // H1 should be appear above the form
+            $siteName = new XMLElement('h1', __('Symphony'));
+            $main->appendChild($siteName);
 
             $this->__buildFormContent();
 
-            $this->Body->appendChild($this->Form);
+            $p = new XMLElement('p', null, array('class' => 'back-to-website'));
+            $backLink = new XMLElement('a', __("back to ") . Symphony::Configuration()->get('sitename', 'general'));
+            $backLink->setAttribute('href', URL);
+            $backLink->setAttribute('class', 'secondary back-link');
+            $p->appendChild($backLink);
+
+            $main->appendChild($this->Form);
+            $main->appendChild($p);
+
+            $this->Body->appendChild($main);
         }
     }
 
     private function __buildFormContent()
     {
-        $fieldset = new XMLElement('fieldset');
+        $divInner = new XMLElement('div', null, array('class' => 'inner'));
+        $divInner->appendChild(new XMLElement('h2', __('Unban via email')));
+
+        $divField = new XMLElement('div', null, array('class' => 'form-field'));
 
         // email was not send
         // or first time here (email_sent == NULL)
         if ($this->_email_sent !== true) {
 
-            $fieldset->appendChild(new XMLElement('p', __('Enter your email address to be sent a remote unban link with further instructions.')));
+            $email = $_POST['email'] ?? null;
+
+            $divInner->appendChild(new XMLElement('p', __('Enter your email address to be sent a remote unban link with further instructions.'), array('class' => 'message info')));
 
             $label = Widget::Label(__('Email Address'));
-            $label->appendChild(Widget::Input('email', General::sanitize($_POST['email']), 'text', array('autofocus','autofocus')));
+            $label->setAttribute('for', 'userlogin');
+            // Do not set the "autofocus" attribute directly.
+            // On touch devices this can cause the virtual keyboard
+            // to open automatically, resulting in a disruptive UX.
+            //
+            // Focus handling is applied via Javascript depending on
+            // the device input type (touch vs. non-touch).
+            $input = Widget::Input('email', General::sanitize($email), 'email', array('id' => 'userlogin', 'data-autofocus' => 'true', 'required' => 'required', 'autocapitalize' => 'off', 'autocomplete' => 'email'));
 
         }
 
-        if (isset($this->_email_sent)) {
-
-            if ($this->_email_sent) {
-
-                $div = new XMLElement('div', __('Email sent. Follow the instruction in it.'));
-                $fieldset->appendChild($div);
-
+        if (isset($this->_email_error) && $this->_email_error) {
+            $alert = new XMLElement('p', __('This Symphony instance has not been set up for emailing, %s', array('<code>' . General::sanitize($this->_email_error) . '</code>')));
+            $alert->setAttribute('role', 'alert');
+            if ($this->oldSymphony() === true) {
+                $alert->setAttribute('class', 'invalid');
             } else {
-
-                $div = new XMLElement('div', NULL, array('class' => 'invalid'));
-                $div->appendChild($label);
-                $div->appendChild(new XMLElement('p', __('There was a problem locating your account. Please check that you are using the correct email address.')));
-                $fieldset->appendChild($div);
+                $alert->setAttribute('class', 'message invalid');
             }
+            $input->setAttribute('aria-invalid', 'false');
+            $divInner->appendChild($alert);
+        } elseif (isset($this->_email_sent)) {
 
-        } else {
+            if ($this->_email_sent === false) {
 
-            $fieldset->appendChild($label);
+                $errorId = 'invalid-email';
+                $errorMsg = new XMLElement('small', __('There was a problem locating your account. Please check that you are using the correct email address.'));
+                $errorMsg->setAttribute('id', $errorId);
+                $errorMsg->setAttribute('role', 'alert');
+                if ($this->oldSymphony() === true) {
+                    $errorMsg->setAttribute('class', 'invalid');
+                }
+                $input->setAttribute('aria-invalid', 'true');
+                $input->setAttribute('aria-describedby', $errorId);
+            } elseif ($this->_email_sent === true) {
+
+                $div = new XMLElement('div', __('Check your inbox. We have sent you an email. Follow the instruction in it.'), array('class' => 'message success'));
+                $divInner->appendChild($div);
+            }
         }
 
-        $this->Form->appendChild($fieldset);
+        if (!isset($this->_email_sent) || $this->_email_sent !== true) {
+            $divField->appendChild($label);
+            $divField->appendChild($input);
+            if (isset($errorMsg)) {
+                $divField->appendChild($errorMsg);
+            }
+        }
+
+        $divInner->appendChild($divField);
+        $this->Form->appendChild($divInner);
 
         if ($this->_email_sent !== true) {
             $div = new XMLElement('div', NULL, array('class' => 'actions'));
