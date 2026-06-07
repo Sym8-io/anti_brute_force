@@ -69,6 +69,12 @@ $dictionary = array(
     'Source' =>
     'Source',
 
+    'Check your inbox. ' =>
+    null,
+
+    'We have sent you an email. Follow the instruction in it.' =>
+    'Nous vous avons envoyé un e-mail. Veuillez suivre les instructions qui y figurent.',
+
     'Enter your email address to be sent a remote unban link with further instructions.' =>
     'Veuillez entrer votre adresse courriel pour recevoir un lien et des instruction pour vous ré-autoriser.',
 
