@@ -150,7 +150,7 @@ class contentExtensionAnti_brute_forceLogin extends contentLogin
                 $input->setAttribute('aria-describedby', $errorId);
             } elseif ($this->_email_sent === true) {
 
-                $div = new XMLElement('div', __('Check your inbox. We have sent you an email. Follow the instruction in it.'), array('class' => 'message success'));
+                $div = new XMLElement('div', __('Check your inbox. ') . __('We have sent you an email. Follow the instruction in it.'), array('class' => 'message success'));
                 $divInner->appendChild($div);
             }
         }
