@@ -19,6 +19,16 @@
     <!-- None -->
   </dependencies>
   <releases>
+    <release version="2.3.0" date="2026-06-08" min="2.7.0" max="2.x.x">
+      - Prevent global ban check on login and unban flow
+      - The structure of screen messages has been adapted to the new structure
+      - POST data is discarded only for blocked requests
+      - The cron job has been updated
+      - The structure of the "Unban IP link" message has been updated
+      - Fix: If no "From" email address defined, no unban email is sent
+      - Improved: HTTP status codes for banned and blacklisted error pages
+      - Update the README file and the license
+    </release>
     <release version="2.2.1" date="2025-05-22" min="2.7.0" max="2.x.x">
       - Alter tables to utf8mb4
     </release>
